@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - airtable_write_function
+      - --entry-point=functions.AirtableWriteFunction
+      - --region=europe-west3
+      - --source=.
+      - --trigger-topic=airtable.requested
+      - --runtime=java17
+      - --memory=256MB
+      - --set-env-vars=AIRTABLE_DATABASE=$_AIRTABLE_DATABASE,GCP_PROJECT=$_GCP_PROJECT,AIRTABLE_TABLE=$_AIRTABLE_TABLE
+      - --set-secrets=AIRTABLE_TOKEN=AIRTABLE_TOKEN:latest
